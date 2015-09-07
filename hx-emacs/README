@@ -1,0 +1,35 @@
+
+Emacs haxe completion.
+
+Inspired by downloading 500mb of an eclipse plugin for the same purpose.
+
+Integrated with eproject by parsing a build.hxml from the eprojects home
+directory and then storing the classpaths until the project is changed. I only use
+with js target so works very well in that instance for multiple compilation targets.
+
+Completion on ".". Completions placed into an ido selection, very nice with ido
+flex matching enabled.
+
+Completion on "(". A new buffer *haXe* is created where the ( parameter output
+is placed for reference.
+
+I'm not expecting much take up on this and so I expect users to know how to
+tweak it to their own use. However if you're interested but can't make it work
+let me know.
+
+In my haxe mode setup I have the following keys
+
+   (local-set-key (kbd ".") (lambda () (interactive) (hxc-complete ".")))
+   (local-set-key (kbd "(") (lambda () (interactive) (hxc-complete "(")))
+
+
+I'm using the haxe mode by Jens Peter Secher.
+
+If you're not using eproject you'll need to tweak this function
+
+(defun hxc-prj-dir ()
+  (cadr prj-current))
+
+to return your project dir. It's currently set to eprojects prj-current.
+
+Will probably add flymake support and a api documentation server to round it out.
